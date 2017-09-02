@@ -20,7 +20,7 @@
 		$delusuario = mysqli_query($link,"DELETE FROM usuarios WHERE login = '$_SESSION[login]'");
 		session_start();
 		session_destroy();
-		header('Location: index.html');
+		header('Location: index.php');
 	?>
 </body>
 
