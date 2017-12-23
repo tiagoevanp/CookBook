@@ -1,12 +1,13 @@
- 	<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<?php
-		include "sql_connect.php";
+		include "sistema/sql_connect.php";
+		session_start();
   	?>
 <head>
 	
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="stylesheet.css">
+	<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
 	<title>Login</title>
 
 </head>
@@ -25,17 +26,23 @@
 	<p>Digite seu login e senha para acessar suas receitas:</p>
 	
 	<?php
-	
+
+		// Confere se já está aberto alguma sessão e redireciona para painel
+		
+		if (isset($_SESSION['login']) && isset($_SESSION['senha'])){
+			header('Location: painel.php');
+		}
+
 		if(isset($_POST['login_acesso']) && isset($_POST['senha_acesso'])){
 			$login = $_POST['login_acesso'];
 			$senha = $_POST['senha_acesso'];
-
+			
 			$loginsenha = mysqli_query($link, "SELECT * FROM usuarios WHERE login = '$login' AND senha = '$senha'");
 
 			if(mysqli_num_rows($loginsenha) > 0){
-				session_start();
 				$_SESSION['login']=$_POST['login_acesso'];
 				$_SESSION['senha']=$_POST['senha_acesso'];
+				
 				header('Location: painel.php');
 			}
 			else{
@@ -43,7 +50,7 @@
 			};
 		
 		}
-		else{};
+		else{}
 
 	?>
 
@@ -53,7 +60,7 @@
 		<input name="button" class="button" type="submit" value="Acessar">
 	</form>
 	
-	<br><br>
+	<br><br><br><br>
 	
 	<a href="cadastro.php">Não possui login?</a>
 
