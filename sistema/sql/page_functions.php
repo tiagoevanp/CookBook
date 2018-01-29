@@ -1,4 +1,4 @@
-<?php
+	<?php
 	include 'sql_functions.php';
 
 	function user($link){
@@ -61,26 +61,26 @@
 		$nomeDuplicata = nomeDuplicata($link, $nome, $sobrenome);
 		$loginDuplicata = loginDuplicata($link, $login, $senha);
 		
-		if (mysqli_num_rows($nomeduplicata) > 0){
+		if (mysqli_num_rows($nomeDuplicata) > 0){
 			echo "<div class='alert alert-danger'>Nome e sobrenome já estão cadastrados!</div>";
 		}
 
-		else if (mysqli_num_rows($loginduplicata) > 0) {
+		else if (mysqli_num_rows($loginDuplicata) > 0) {
 			echo "<div class='alert alert-danger'>Login e senha já existente!</div>";
 		}
 
-		elseif (strlen($login_cadastro) < 6){
+		elseif (strlen($login) < 6){
 			echo "<div class='alert alert-danger'>Login deve ter no minimo 6 caracteres!</div>";
 		}
 
-		elseif (strlen($senha_cadastro) < 6){
+		elseif (strlen($senha) < 6){
 			echo "<div class='alert alert-danger'>Senha deve ter no mínimo 6 caracteres!</div>";
 		}				
 
 		else {
 			$criteria = new criteria();
 			$criteria->addConditionInsert(['nome', 'sobrenome', 'login', 'senha'], [$nome, $sobrenome, $login, $senha]);
-			sqlQueryInsert($link, $criteria, 'usuarios');
+			$insert = sqlQueryInsert($link, $criteria, 'usuarios');
 			
 			createUserFolders($link, $login, $senha);
 		}
@@ -91,7 +91,7 @@
 		$criteria->addCondition('login', $login);
 		$criteria->addCondition('senha', $senha);
 
-		$usuario = sqlFetchAssoc($link, $criteria, $tablename);
+		$usuario = sqlFetchAssoc($link, $criteria, 'usuarios');
 
 		mkdir('usuarios/' . $usuario['id'] . '/imagens', 0777, true);
 

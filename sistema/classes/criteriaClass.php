@@ -36,7 +36,10 @@
 		}
 
 		public function addConditionInsert ($columns, $values) {
-			return $this->insert .= ' (' . implode(', ', $columns) . ') VALUES (' . implode(', ', '\'' . $values . '\')');
+			foreach ($values as $key => $value) {
+				$valores[$key] = '\'' . $value . '\'';
+			}
+			return $this->insert .= ' (' . implode(', ', $columns) . ') VALUES (' . implode(', ', $valores ) . ')';
 		}
 	}
 ?>

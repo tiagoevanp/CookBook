@@ -41,7 +41,7 @@
 					}
 
 					if(isset($_POST['nome']) && isset($_POST['sobrenome']) && isset($_POST['login']) && isset($_POST['senha'])){	
-						duplicataCheck();
+						duplicataCheck($link);
 					}
 				?>
 
