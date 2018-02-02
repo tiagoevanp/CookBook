@@ -138,11 +138,16 @@ a.fa {
 .card {
 	border: none;
 	transition: .5s opacity;
+	margin-bottom: 40px;
 
 }
 
 .card:hover {
 	opacity: .7;
+}
+
+.img-card {
+	height: 200px;
 }
 
 .dropdown-item:active {

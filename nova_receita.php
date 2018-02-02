@@ -17,7 +17,8 @@
 	<div id="conteudo" class="jumbotron">
 		<?php
 			if (isset($_POST['nome_receita']) && isset($_POST['autor']) &&isset($_POST['ingredientes']) && isset($_POST['receita'])) {
-				if (!empty($id = $_GET['id'])){
+				if (!empty($_GET['id'])){
+					$id = $_GET['id'];
 					salvarReceitaEditada($link);
 					header("Location: receita.php?id=$id" );
 				}
@@ -29,18 +30,54 @@
 							incluirReceita($link);
 							
 							$receita = selectReceita($link);
-							$nome = $receita['id'] . '.jpg';
+							$nome = $receita['id'];
+							$extensao = '.jpg';
 												
-							if (move_uploaded_file($_FILES['foto']['tmp_name'], 'usuarios/' . $usuario['id'] . '/imagens/' . $nome)) {
+							if (move_uploaded_file($_FILES['foto']['tmp_name'], 'usuarios/' . $usuario['id'] . '/imagens/' . $nome . $extensao)) {
+								echo "<div class='modal fade' id='modal_crop'>
+												<div class='modal-dialog'>
+						    					<div id='modal' class='modal-content'>
+						    						<div class='modal-header'>
+															<h2 class='modal-title'>Ajustar Corte da Foto</h2>
+														</div>
 
-								$img = imagecreatefromjpeg('usuarios/' . $usuario['id'] . '/imagens/' . $nome);
-								$imgX = imagesx($img);
-								$imgY = imagesy($img);
-								$size = 200;
-								$x = ($imgX/2) - ($size/2);
-								$y = ($imgY/2) - ($size/2);
-								$cropImg = imagecrop($img, ['x' => $x, 'y' => $y, 'width' => $size, 'height' => $size]);
-								$newImg = imagejpeg($cropImg, 'usuarios/' . $usuario['id'] . '/imagens/' . $receitaId['id'] . 'croped.jpg');
+														<div class='modal-body'>
+															<p class='lead'>Selecione o corte na foto da receita.</p>
+															<img id='image' src='usuarios/" . $usuario['id'] . "/imagens/" . $nome . $extensao . "'>
+															<br>";
+													echo "<button class='btn btn-principal btn-lg btn-block' onclick='getCanvas(" . $usuario['id'] . ", $nome)'>Cortar</button>";
+
+													echo"<script type='text/javascript'>
+																var image = document.getElementById('image');
+																var cropper = new Cropper(image, {
+																	aspectRatio: 4 / 4,
+																	viewMode: 3,
+																	dragMode: 'move',
+																	guides: false,
+																	center: false,
+																	cropBoxMovable: false,
+																	cropBoxResizable: false,
+																	autoCropArea: 1
+																});
+															</script>";
+														
+								echo 			"</div>
+												</div>
+											</div>
+										</div>";
+								echo "<script>
+												$('#modal_crop').modal({show:true})
+											</script>";
+								echo "<script type='text/javascript'>
+												function getCanvas (usuario, nome) {
+													var data = cropper.getData();
+													var crop = data.x + ', ' + data.y + ', ' + data.width + ', ' + data.height;
+													var xhttp = new XMLHttpRequest();
+													xhttp.open('POST', 'sistema/sql/page_functions.php', true);
+													xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+													xhttp.send('crop=' + crop + '&user=' + usuario + '&recipt=' + nome);
+												}
+											</script>";
 								
 								echo "<div class='alert alert-success'>Receita gravada com sucesso</div>";
 							}

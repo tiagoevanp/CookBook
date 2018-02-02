@@ -18,16 +18,18 @@
 	function loginCheck($link) {
 		$login = $_POST['login_acesso'];
 		$senha = $_POST['senha_acesso'];
+		$salt = crypt($senha, 'criptografia');
+		$senha_criptografica = crypt($senha, $salt);
 		
 		$criteria = new criteria();
 		$criteria->addCondition('login', $login);
-		$criteria->addCondition('senha', $senha);
+		$criteria->addCondition('senha', $senha_criptografica);
 		
 		$user = sqlQuerySelect($link, $criteria, 'usuarios');
 		
 		if (!empty($user->num_rows)) {
 			$_SESSION['login'] = $login;
-			$_SESSION['senha'] = $senha;
+			$_SESSION['senha'] = $senha_criptografica;
 
 			header('Location: painel.php');
 		}
@@ -57,6 +59,7 @@
 		$sobrenome = $_POST['sobrenome'];
 		$login = $_POST['login'];
 		$senha = $_POST['senha'];
+		$salt = crypt($senha, 'criptografia');
 		
 		$nomeDuplicata = nomeDuplicata($link, $nome, $sobrenome);
 		$loginDuplicata = loginDuplicata($link, $login, $senha);
@@ -78,11 +81,12 @@
 		}				
 
 		else {
+			$senha_criptografica = crypt($senha, $salt);
 			$criteria = new criteria();
-			$criteria->addConditionInsert(['nome', 'sobrenome', 'login', 'senha'], [$nome, $sobrenome, $login, $senha]);
+			$criteria->addConditionInsert(['nome', 'sobrenome', 'login', 'senha'], [$nome, $sobrenome, $login, $senha_criptografica]);
 			$insert = sqlQueryInsert($link, $criteria, 'usuarios');
 			
-			createUserFolders($link, $login, $senha);
+			createUserFolders($link, $login, $senha_criptografica);
 		}
 	}
 
@@ -102,6 +106,7 @@
 		$user = user($link);
 		$criteria = new criteria();
 		$criteria->addCondition('login', $user['login']);
+		$criteria->addCondition('senha', $user['senha']);
 		sqlQueryDelete($link, $criteria, 'usuarios');
 		deleteReceitas($link, $user);
 	}
@@ -123,6 +128,10 @@
 	function incluirReceita ($link) {
 		$user = user($link);
 		$receita = new receita();
+		$receita->nome = $_POST['nome_receita'];
+		$receita->autor = $_POST['autor'];
+		$receita->ingredientes = $_POST['ingredientes'];
+		$receita->preparo = $_POST['receita'];
 		$criteria = new criteria();
 		$criteria->addConditionInsert(['nome_receita', 'autor', 'ingredientes', 'receita', 'pessoaid'], [$receita->nome, $receita->autor, $receita->ingredientes, $receita->preparo, $user['id']]);
 		return sqlQueryInsert($link, $criteria, 'receitas');
@@ -172,5 +181,26 @@
 		$criteria->addConditionLike('nome_receita', $_POST['pesquisa']);
 		$criteria->order = ' nome_receita ';
 		return sqlFetchAll($link, $criteria, 'receitas');
+	}
+	
+	if (!empty($_POST['crop'])) {
+
+		actionCropFoto();
+	}
+
+	function actionCropFoto () {
+		$crop = explode(',', $_POST['crop']);
+		$usuario = $_POST['user'];
+		$receita = $_POST['recipt'];
+		// var_dump($crop);
+		// echo $usuario . " " . $receita;
+		
+		$img = imagecreatefromjpeg('../../usuarios/' . $usuario . '/imagens/' . $receita . '.jpg');
+		$imgX = $crop[0];
+		$imgY = $crop[1];
+		$width = $crop[2];
+		$height = $crop[3];
+		$cropImg = imagecrop($img, ['x' => $imgX, 'y' => $imgY, 'width' => $width, 'height' => $height]);
+		$newImg = imagejpeg($cropImg, '../../usuarios/' . $usuario . '/imagens/' . $receita . 'croped.jpg');
 	}
 ?>

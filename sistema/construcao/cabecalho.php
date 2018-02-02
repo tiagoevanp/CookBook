@@ -15,5 +15,6 @@
 	<script src="javascript/popper.min.js"></script>
 	<script src="javascript/bootstrap/bootstrap.min.js"></script>
 	<script src="javascript/cropper.min.js"></script>
+	<script type="text/javascript" src="javascript/pageScripts.js"></script>	
 	
 </head>

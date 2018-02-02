@@ -1,6 +1,6 @@
 <?php
-	include 'sistema/classes/criteriaClass.php';
-	include 'sistema/classes/receitaClass.php';
+	include 'classes/criteriaClass.php';
+	include 'classes/receitaClass.php';
 
 	function sqlSelect ($criteria, $tablename) {
 		$sql = 'SELECT ' . $criteria->select . ' FROM ' . $tablename;
