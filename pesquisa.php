@@ -31,10 +31,10 @@
 																	<div class='card'>
 																	<a class='painel-link' href='receita.php?id=" . $value[0] . "'>";
 							if (file_exists('usuarios/' . $usuario['id'] . '/imagens/' . $value[0] . 'croped.jpg')) {
-								$telaPesquisaReceitas .=	"<img class='rounded' src='usuarios/" . $usuario['id'] . "/imagens/" . $value[0] . "croped.jpg'>";
+								$telaPesquisaReceitas .=	"<img class='rounded img-card' src='usuarios/" . $usuario['id'] . "/imagens/" . $value[0] . "croped.jpg'>";
 							}
 							else {
-								$telaPesquisaReceitas .= "<img class='rounded' src='imagens/semfoto.jpg'>";
+								$telaPesquisaReceitas .= "<img class='rounded img-card' src='imagens/semfoto.jpg'>";
 							}
 							
 							$enfase = "<em class='cor'>" . strtoupper($_POST['pesquisa']) . '</em>';
