@@ -51,7 +51,7 @@
 	}
 
 	function sqlDelete ($criteria, $tablename) {
-		$sql = 'DELETE FROM ' . $tablename . ' WHERE ' . $criteria->condition;
+		$sql = 'DELETE FROM ' . $tablename . $criteria->condition;
 		return $sql;
 	}
 
