@@ -41,7 +41,7 @@
 															<h2 class='modal-title'>Ajustar Corte da Foto</h2>
 														</div>
 
-														<div class='modal-body'>
+														<div class='modal-body crop-modal-body text-center'>
 															<p class='lead'>Selecione o corte na foto da receita.</p>
 															<img id='image' src='usuarios/" . $usuario['id'] . "/imagens/" . $nome . $extensao . "'>
 															<br>";
@@ -51,7 +51,7 @@
 																var image = document.getElementById('image');
 																var cropper = new Cropper(image, {
 																	aspectRatio: 4 / 4,
-																	viewMode: 3,
+																	viewMode: 1,
 																	dragMode: 'move',
 																	guides: false,
 																	center: false,
@@ -76,6 +76,7 @@
 													xhttp.open('POST', 'sistema/sql/page_functions.php', true);
 													xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 													xhttp.send('crop=' + crop + '&user=' + usuario + '&recipt=' + nome);
+													window.location.href = 'receita.php?id=" . $nome . "';
 												}
 											</script>";
 								
