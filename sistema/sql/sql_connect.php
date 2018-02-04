@@ -7,10 +7,10 @@
 	$pass = "";
 	$banco = "meu_livro_de_receitas";
 	$link = mysqli_connect($host, $user, $pass, $banco);
-		
 	// conferindo status da conexão
 		
 	if (!$link){
   		die("Erro de conexão: " . mysqli_connect_error());
 	};
-?>
+
+	$link->set_charset("utf8");
