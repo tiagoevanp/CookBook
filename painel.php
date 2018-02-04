@@ -26,17 +26,17 @@
 				else{
 				 	foreach ($receitas as $value) {
 				 		$telaReceitas =  "<div class='text-center col-sm-4'>
-																<div class='card'>
+																<div class='card rounded'>
 																<a class='painel-link' href='receita.php?id=" . $value[0] . "'>";
 						if (file_exists('usuarios/' . $usuario['id'] . '/imagens/' . $value[0] . 'croped.jpg')) {
-							$telaReceitas .=	"<img class='rounded img-card' src='usuarios/" . $usuario['id'] . "/imagens/" . $value[0] . "croped.jpg'>";
+							$telaReceitas .=	"<img class='rounded-top img-card' src='usuarios/" . $usuario['id'] . "/imagens/" . $value[0] . "croped.jpg'>";
 						}
 						else {
-							$telaReceitas .= "<img class='rounded img-card' src='imagens/semfoto.jpg'>";
+							$telaReceitas .= "<img class='rounded-top img-card' src='imagens/semfoto.jpg'>";
 						}
 						
 						
-						$telaReceitas .=	"<h3 class='card-text'>" . $value[1] . "</h3>
+						$telaReceitas .=	"<h3 class='card-text display-5'>" . $value[1] . "</h3>
 														</a>
 													</div>
 												</div>";

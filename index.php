@@ -27,7 +27,7 @@
 			</div>
 			
 			<div class="col-sm">
-				<h1>Login:</h1>
+				<h1 class="display-4">Login:</h1>
 				<p class="lead">Digite seu login e senha para acessar suas receitas:</p>
 				
 				<?php

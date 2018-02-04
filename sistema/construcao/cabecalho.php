@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="css/custom.css">
 	<link rel="stylesheet" href="css/cropper.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Cookie|Handlee|Indie+Flower|Patrick+Hand|Sacramento|Telex" rel="stylesheet">
 	
 	<script src="javascript/jquery-3.2.1.min.js"></script>
 	<script src="javascript/popper.min.js"></script>

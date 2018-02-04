@@ -1,12 +1,12 @@
 body {
-	/*background-image: url("../imagens/bg.png");*/
+	background-color: white;
 }
 
 textarea {
 	resize: none;
 }
 
-footer {
+.footer {
 	background-color: #74ffbd;
 }
 
@@ -25,7 +25,7 @@ em.cor {
 }
 
 #conteudo {
-	background-color: #fff;
+	background-color: white;
 }
 
 #ingredientes {
@@ -39,6 +39,7 @@ em.cor {
 #navbar {
 	background-color: #e9ff17;
 	border-bottom: solid 1px lightgray;
+	box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2), 0 0 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #navReceita {
@@ -64,6 +65,10 @@ em.cor {
 
 #image {
 	max-width: 100%; 
+}
+
+#col-receita {
+	border-right: 1px dotted gray;
 }
 
 .nav-link {
@@ -143,7 +148,8 @@ a.fa {
 	border: none;
 	transition: .5s opacity;
 	margin-bottom: 40px;
-
+	margin: 20px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .card:hover {
@@ -151,7 +157,14 @@ a.fa {
 }
 
 .img-card {
-	height: 200px;
+	width: 100%;
+}
+
+.img-receita {
+	height: 400px;
+	margin: 20px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 }
 
 .dropdown-item:active {
@@ -160,4 +173,28 @@ a.fa {
 
 .italico {
 	font-style: italic;
+}
+
+.border-receita {
+	border: 1px solid gray !important;
+}
+
+.card-text {
+	padding: 10px; 
+}
+
+.row-receita {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.display-2 {
+	font-family: Handlee;
+}
+
+.display-3, .display-4 {
+	font-family: Patrick Hand;
+}
+
+.display-5 {
+	font-family: Arial;
 }

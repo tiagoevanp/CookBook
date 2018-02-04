@@ -128,7 +128,7 @@
 			<div class="form-row mb-5">
 				<div class="form-group col-sm-10 m-auto">
 					<label for="foto">Imagem da receita (Formato apenas em JPG ou PNG):</label>
-					<input type="file" id="foto" class="form-control-file" name="foto"></input>
+					<input type="file" id="foto" class="form-control-file" name="foto" <?php if (isset($_GET['id'])){echo "disabled";} ?>></input>
 				</div>
 			</div>
 
