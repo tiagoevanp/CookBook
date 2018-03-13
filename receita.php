@@ -33,25 +33,15 @@
 					?>
 				</div>
 				<div class="col align-self-center text-center">
-				
-				
-				<a data-toggle="popover" data-placement="left" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">
-				<?php
-					$usuario = user($link);
-					if (file_exists("usuarios/" . $usuario['id'] . "/imagens/" . $idReceita . "croped.jpg")) {
-						echo "<img class='rounded img-receita' src='usuarios/" . $usuario['id'] . "/imagens/" . $idReceita . "croped.jpg'>";
-					}
-					else {
-						echo "<img class='rounded img-receita' src='imagens/semfoto.jpg'>";
-					}
-				?>	
-				</a>
-				<script type="text/javascript">
-					$(function () {   
-  					$('[data-toggle="popover"]').popover() 
-					});
-				</script>	
-
+					<?php
+						$usuario = user($link);
+						if (file_exists("usuarios/" . $usuario['id'] . "/imagens/" . $idReceita . "croped.jpg")) {
+							echo "<img class='rounded img-receita' src='usuarios/" . $usuario['id'] . "/imagens/" . $idReceita . "croped.jpg'>";
+						}
+						else {
+							echo "<img class='rounded img-receita' src='imagens/semfoto.jpg'>";
+						}
+					?>
 				</div>
 			</div>
 		</div>

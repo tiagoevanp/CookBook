@@ -16,9 +16,10 @@
 		</div>
 		<div class="row mb-5">
 			<?php
-								
-				$usuario = user($link);				
-				$receitas = selectReceitas($link);
+				$database = new connectDatabase;
+				$connection = $database->connectWithDatabase();
+				$usuario = user($connection);				
+				$receitas = selectReceitas($connection);
 
 				if (!$receitas){
 					echo '<p>Você ainda não possui nenhuma receita.</p>';

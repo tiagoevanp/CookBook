@@ -194,8 +194,7 @@
 		$receita = $_POST['recipt'];
 		// var_dump($crop);
 		// echo $usuario . " " . $receita;
-		
-		$img = imagecreatefromjpeg('../../usuarios/' . $usuario . '/imagens/' . $receita . '.jpg');
+		$img = imagecreatefromstring(file_get_contents('../../usuarios/' . $usuario . '/imagens/' . $receita . '.jpg'));
 		$imgX = $crop[0];
 		$imgY = $crop[1];
 		$width = $crop[2];

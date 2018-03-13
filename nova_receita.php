@@ -27,12 +27,13 @@
 						$extensão = strtolower(pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION));
 						
 						if (strstr('jpg; png; jpeg', $extensão)) {
-							incluirReceita($link);
-							
-							$receita = selectReceita($link);
-							$nome = $receita['id'];
-							$extensao = '.jpg';
-												
+							if (incluirReceita($link)){
+								$usuario = user($link);
+								$receita = selectReceita($link);
+								$nome = $receita['id'];
+								$extensao = '.jpg';	
+							}
+											
 							if (move_uploaded_file($_FILES['foto']['tmp_name'], 'usuarios/' . $usuario['id'] . '/imagens/' . $nome . $extensao)) {
 								echo "<div class='modal fade' id='modal_crop'>
 												<div class='modal-dialog'>
@@ -75,9 +76,14 @@
 													var xhttp = new XMLHttpRequest();
 													xhttp.open('POST', 'sistema/sql/page_functions.php', true);
 													xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+													xhttp.onreadystatechange = function () {
+														if (xhttp.readyState === XMLHttpRequest.DONE){
+															window.location.href = 'receita.php?id=" . $nome . "';
+														}
+													};
 													xhttp.send('crop=' + crop + '&user=' + usuario + '&recipt=' + nome);
-													window.location.href = 'receita.php?id=" . $nome . "';
 												}
+
 											</script>";
 								
 								echo "<div class='alert alert-success'>Receita gravada com sucesso</div>";

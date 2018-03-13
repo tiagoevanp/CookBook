@@ -14,7 +14,7 @@
 	
 	<div id="conteudo" class='jumbotron container'>
 		<div class="row mb-5 justify-content-md-center">
-			<p class="lead"><?php echo "A pesquisa por <em class='cor'>\"" . strtoupper($_POST['pesquisa']) . "\"</em> retornou " . count($buscarReceita) . " resultado(s):" ?></p>
+			<p class="lead"><?php echo "A pesquisa por <em class='cor'>\"" . $_POST['pesquisa'] . "\"</em> retornou " . count($buscarReceita) . " resultado(s):" ?></p>
 		</div>
 		<div class="row mb-5">
 			<?php
@@ -37,9 +37,8 @@
 								$telaPesquisaReceitas .= "<img class='rounded img-card' src='imagens/semfoto.jpg'>";
 							}
 							
-							$enfase = "<em class='cor'>" . strtoupper($_POST['pesquisa']) . '</em>';
-							$nomeReceita = str_ireplace($_POST['pesquisa'], $enfase, $value[1]);
-							$telaPesquisaReceitas .=	"<h3 class='card-text'>" . $nomeReceita . "</h3>
+							$enfase = "<em class='cor'>" . $_POST['pesquisa'] . '</em>';
+							$telaPesquisaReceitas .=	"<h3 class='card-text'>" . $value[1] . "</h3>
 															</a>
 														</div>
 													</div>";
