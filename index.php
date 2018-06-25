@@ -6,7 +6,6 @@
 ?>
 
 <body>
-
 	<div id="top" class="jumbotron">
 		<div class="container">
 			<div class="media">

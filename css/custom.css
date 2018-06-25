@@ -1,4 +1,10 @@
+@font-face {
+	font-family: 'pixelFont';
+	src: url(../fonts/Minecraftia-Regular.ttf);
+}
+
 body {
+	font-family: 'pixelFont', sans-serif;
 	background-color: white;
 }
 
@@ -185,16 +191,4 @@ a.fa {
 
 .row-receita {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.display-2 {
-	font-family: Handlee;
-}
-
-.display-3, .display-4 {
-	font-family: Patrick Hand;
-}
-
-.display-5 {
-	font-family: Arial;
 }
